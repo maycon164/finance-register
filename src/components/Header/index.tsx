@@ -13,11 +13,7 @@ const menuItems = [
         name: "Gráficos",
         icon: <Gauge size={36} />
     },
-    {
-        href: "/tags",
-        name: "Identificadores",
-        icon: <Tags size={36} />
-    },
+
     {
         href: "/config",
         name: "Configurações",
@@ -30,7 +26,7 @@ export function Header() {
     return <header className="w-screen p-5 fixed bottom-0 flex justify-center items-center inset-shadow-xs bg-white *:flex-auto *:text-center">
 
         {menuItems.map(item =>
-            <Button variant="link" className="flex flex-col " asChild>
+            <Button key={item.name} variant="link" className="flex flex-col" asChild>
                 <Link href={item.href}>
                     {item.icon}
                     {item.name}
