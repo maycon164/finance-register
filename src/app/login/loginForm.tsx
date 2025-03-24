@@ -35,9 +35,6 @@ export function LoginForm() {
         const { email } = data;
         const users = ["david@email.com", "maycon@email.com", "suzana@email", "ana@email.com", "stifani@email.com", "jean@email.com", "jessica@email.com"]
         
-        console.log(users.includes(email))
-        console.log(email)
-        
         if(users.includes(email)) { 
 
             ctx?.setUser({name: email.split("@")[0], email})

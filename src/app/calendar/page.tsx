@@ -1,4 +1,4 @@
-import { ContinuousCalendar } from "@/components/Calendar";
+import { Example } from "./components/example";
 
 const lastRegisters = [
     {
@@ -44,7 +44,7 @@ export default function CalendarPage() {
             <h1 className="m-5 p-2 text-3xl font-semibold border-b-2 ">Calendário</h1>
 
             <div className="relative mt-10">
-                <ContinuousCalendar />
+                <Example/>
             </div>
 
             <div className="m-5">

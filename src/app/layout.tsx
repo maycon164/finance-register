@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
 import { AppContextWrapper } from "@/context";
+import MainLayout from "./MainLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +31,10 @@ export default function RootLayout({
       >
       <AppContextWrapper>
 
-        <section className="">
+        <MainLayout>
           {children}
-        </section>
+        </MainLayout>
 
-        <Header />
       </AppContextWrapper>
 
       </body>
