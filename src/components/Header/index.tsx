@@ -1,6 +1,7 @@
-import { Calendar1, Cog, Gauge, Tags } from "lucide-react";
+import { Calendar1, Cog, Gauge } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+
 
 const menuItems = [
     {
@@ -23,7 +24,9 @@ const menuItems = [
 ]
 
 export function Header() {
-    return <header className="w-screen p-5 fixed bottom-0 flex justify-center items-center inset-shadow-xs bg-white *:flex-auto *:text-center">
+
+
+    return <header className="w-screen p-5 fixed bottom-0 flex justify-center items-center inset-shadow-xs bg-white *:flex-1 *:text-center">
 
         {menuItems.map(item =>
             <Button key={item.name} variant="link" className="flex flex-col" asChild>
