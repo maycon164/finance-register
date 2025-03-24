@@ -17,9 +17,8 @@ const menuItems = [
 
     {
         href: "/config",
-        name: "Configurações",
+        name: "Config",
         icon: <Cog size={36} />
-
     }
 ]
 
