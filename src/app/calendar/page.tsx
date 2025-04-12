@@ -5,6 +5,7 @@ import { useGetRegisterByDate } from "./api";
 import { RegisterCard } from "./components/RegisterCard";
 import WrapperCalendarWithForm from "./components/WrapperCalendar";
 import { formatDate } from "@/utils";
+import { RegisterType } from "@/models";
 
 export default function CalendarPage() {
   const [date, setDate] = useState<Date>(new Date());
@@ -36,7 +37,7 @@ export default function CalendarPage() {
               <RegisterCard
                 username={register.userName}
                 value={register.value}
-                type={register.type}
+                type={register.type as RegisterType}
               />
             </li>
           ))}
