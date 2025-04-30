@@ -29,14 +29,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 mb-30`}
       >
-      <AppContextWrapper>
-
-        <MainLayout>
-          {children}
-        </MainLayout>
-
-      </AppContextWrapper>
-
+        <AppContextWrapper>
+          <MainLayout>{children}</MainLayout>
+        </AppContextWrapper>
       </body>
     </html>
   );
