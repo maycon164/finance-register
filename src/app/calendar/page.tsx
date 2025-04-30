@@ -34,7 +34,7 @@ export default function CalendarPage() {
               <RegisterCard
                 username={register.createdBy.name}
                 value={register.value}
-                type={register}
+                type={register.type}
               />
             </li>
           ))}

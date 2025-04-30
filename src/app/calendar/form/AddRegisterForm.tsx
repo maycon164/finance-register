@@ -12,29 +12,49 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useAddRegister } from "../api/add-register";
+import { toast } from "sonner";
 
 const registerForm = z.object({
-  quantity: z.number().min(1),
+  quantity: z.string().min(1),
+  description: z.string().optional(),
   type: z.string(),
   pointSale: z.string(),
+  register: z.date(),
 });
 
-type RegisterForm = z.infer<typeof registerForm>;
+export type RegisterForm = z.infer<typeof registerForm>;
 
-export function RegisterForm() {
+export function RegisterForm({ date }: Readonly<{ date: Date }>) {
   const { register, handleSubmit, formState, setValue } = useForm<RegisterForm>(
     {
       resolver: zodResolver(registerForm),
       defaultValues: {
-        quantity: 1,
+        quantity: "1",
         type: "",
         pointSale: "",
+        register: date,
+        description: "",
       },
     }
   );
 
+  const addRegister = useAddRegister({
+    onSuccess: () => {
+      toast.success("Registro adicionado com sucesso", {
+        description: "O registro foi adicionado com sucesso.",
+      });
+    },
+    onError: () => {
+      toast.error("Erro ao adicionar registro", {
+        description: "Tente novamente mais tarde.",
+      });
+    },
+  });
+
   function handleFormSubmit(data: RegisterForm) {
     console.log(data);
+    addRegister.mutate(data);
   }
 
   return (
@@ -43,7 +63,7 @@ export function RegisterForm() {
       className="flex flex-col gap-y-3 mt-5 *:w-full"
     >
       <div className="flex flex-col space-y-2">
-        <Label htmlFor="name">Quantidade</Label>
+        <Label htmlFor="name">Quantia</Label>
         <Input
           id="quantity"
           placeholder="informe a quantidade"

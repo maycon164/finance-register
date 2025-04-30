@@ -17,12 +17,12 @@ export default function WrapperCalendarWithForm(
 ) {
   const { onClickDate } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState("");
+  const [date, setDate] = useState(new Date());
 
   function handleClick(day: number, month: number, year: number) {
     const date = new Date(year, month, day);
+    setDate(date);
 
-    setData(formatDate(date));
     onClickDate(date);
     setIsOpen(true);
   }
@@ -30,7 +30,7 @@ export default function WrapperCalendarWithForm(
   return (
     <>
       <ContinuousCalendar onClick={handleClick} />
-      <CardWithForm isOpen={isOpen} setIsOpen={setIsOpen} data={data} />
+      <CardWithForm isOpen={isOpen} setIsOpen={setIsOpen} date={date} />
     </>
   );
 }
@@ -38,11 +38,11 @@ export default function WrapperCalendarWithForm(
 interface CardWithFormProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  data: string;
+  date: Date;
 }
 
 export function CardWithForm(props: Readonly<CardWithFormProps>) {
-  const { isOpen, setIsOpen, data } = props;
+  const { isOpen, setIsOpen, date } = props;
 
   return (
     <AlertDialog open={isOpen}>
@@ -56,9 +56,9 @@ export function CardWithForm(props: Readonly<CardWithFormProps>) {
         </Button>
 
         <h1 className="text-2xl font-semibold">Adicionar Registro</h1>
-        <p>{data}</p>
+        <p>{formatDate(date)}</p>
 
-        <RegisterForm />
+        <RegisterForm date={date} />
       </AlertDialogContent>
     </AlertDialog>
   );
