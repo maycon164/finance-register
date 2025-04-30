@@ -1,5 +1,6 @@
 import { api } from "@/lib/api";
 import { useMutation } from "@tanstack/react-query";
+import { on } from "events";
 
 interface LoginPostData {
   email: string;
@@ -10,12 +11,17 @@ export interface LoginResponseSuccess {
   token: string;
 }
 
-export function useMakeLogin(
-  onSuccess: (response: LoginResponseSuccess) => void
-) {
+export function useMakeLogin({
+  onError,
+  onSuccess,
+}: {
+  onSuccess: (response: LoginResponseSuccess) => void;
+  onError: (error: string) => void;
+}) {
   return useMutation({
     mutationFn: async (loginData: LoginPostData) => await makeLogin(loginData),
     onSuccess,
+    onError,
   });
 }
 

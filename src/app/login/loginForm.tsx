@@ -10,6 +10,9 @@ import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { LoginResponseSuccess, useMakeLogin } from "./api/make-login";
+import { Loading } from "@/components/loading";
+import { toast } from "sonner";
+import { ShieldAlert } from "lucide-react";
 
 const loginFormSchema = z.object({
   email: z.string().email(),
@@ -30,7 +33,10 @@ export function LoginForm() {
   const router = useRouter();
   const ctx = useAppContext();
 
-  const login = useMakeLogin(onLoginSuccess);
+  const login = useMakeLogin({
+    onSuccess: onLoginSuccess,
+    onError: onLoginError,
+  });
 
   function handleLogin(data: LoginFormSchema) {
     login.mutate(data);
@@ -39,6 +45,14 @@ export function LoginForm() {
   function onLoginSuccess(response: LoginResponseSuccess) {
     ctx?.setToken(response.token);
     router.push("/calendar");
+  }
+
+  function onLoginError(error: string) {
+    //TODO: add if based on status code
+    toast.error("Erro ao Autenticar", {
+      description: "Usuário não encontrado ou senha incorreta.",
+      icon: <ShieldAlert />,
+    });
   }
 
   return (
@@ -58,7 +72,9 @@ export function LoginForm() {
       </div>
 
       <div>
-        <Button className="w-full py-5 text-lg">Entrar</Button>
+        <Button className="w-full py-5 text-lg">
+          {login.isPending ? <Loading /> : "Entrar"}
+        </Button>
       </div>
     </form>
   );
