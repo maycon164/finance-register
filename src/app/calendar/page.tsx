@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useGetRegisterByDate } from "./api";
 import { RegisterCard } from "./components/RegisterCard";
 import WrapperCalendarWithForm from "./components/WrapperCalendar";
 import { formatDate } from "@/utils";
-import { RegisterType } from "@/models";
+import { useGetRegisters } from "./api/get-registers";
 
 export default function CalendarPage() {
   const [date, setDate] = useState<Date>(new Date());
 
-  const { registers } = useGetRegisterByDate({
-    date: date,
-  });
+  const registers = useGetRegisters();
 
   return (
     <section>
@@ -32,12 +29,12 @@ export default function CalendarPage() {
         <p className="text-3xl font-bold text-green-700">+R$500</p>
 
         <ul>
-          {registers.map((register) => (
+          {registers.data?.map((register) => (
             <li className="my-5" key={register.id}>
               <RegisterCard
-                username={register.userName}
+                username={register.createdBy.name}
                 value={register.value}
-                type={register.type as RegisterType}
+                type={register}
               />
             </li>
           ))}

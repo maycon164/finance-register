@@ -1,6 +1,5 @@
 import { api } from "@/lib/api";
 import { useMutation } from "@tanstack/react-query";
-import { on } from "events";
 
 interface LoginPostData {
   email: string;
