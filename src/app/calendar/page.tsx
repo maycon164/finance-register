@@ -32,7 +32,6 @@ export default function CalendarPage() {
       <div className="m-5">
         <div>
           <p className="text-sm text-gray-500">Últimos registros para</p>
-
           <p className="text-2xl font-semibold mb-5">{formatDate(date)}</p>
         </div>
         {totalValue != 0 && (

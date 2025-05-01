@@ -12,7 +12,6 @@ export function RegisterCard(props: Readonly<RegisterCardProps>) {
   const { type, value, email } = props;
 
   const isIncome = type === RegisterType.INCOME;
-
   return (
     <Card
       className={`w-full max-w-sm shadow-md rounded-none border-l-4 border-l-${
