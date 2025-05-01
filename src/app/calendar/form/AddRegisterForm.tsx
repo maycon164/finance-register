@@ -53,7 +53,6 @@ export function RegisterForm({ date }: Readonly<{ date: Date }>) {
   });
 
   function handleFormSubmit(data: RegisterForm) {
-    console.log(data);
     addRegister.mutate(data);
   }
 
@@ -80,7 +79,7 @@ export function RegisterForm({ date }: Readonly<{ date: Date }>) {
           </SelectTrigger>
           <SelectContent position="popper">
             <SelectItem value="income">Entrada</SelectItem>
-            <SelectItem value="outome">Saída</SelectItem>
+            <SelectItem value="outcome">Saída</SelectItem>
           </SelectContent>
         </Select>
         <p>{formState.errors.type?.message}</p>
