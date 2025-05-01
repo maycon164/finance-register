@@ -22,7 +22,7 @@ const addRegister = async (register: RegisterForm) => {
 
 function toRegisterPostRequest(register: RegisterForm): RegisterPostRequest {
   return {
-    spaceId: 2,
+    spaceId: 1, //TODO: remove hardcoded spaceId
     register: {
       description: register.description ?? "",
       value: Number(register.quantity),

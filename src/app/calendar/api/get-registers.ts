@@ -14,14 +14,16 @@ export interface RegisterResponse {
   };
 }
 
-export function useGetRegisters() {
+export function useGetRegisters({ date }: { date: Date }) {
   return useQuery<RegisterResponse[], unknown>({
-    queryKey: ["registers"],
-    queryFn: getRegisters,
+    queryKey: ["registers", date],
+    queryFn: () => getRegisters(date),
   });
 }
 
-const getRegisters = async (): Promise<RegisterResponse[]> => {
-  const response = await api.get("/registers");
+const getRegisters = async (date: Date): Promise<RegisterResponse[]> => {
+  const response = await api.get(
+    `/registers?day=${date.toISOString().slice(0, 10)}`
+  );
   return response.data;
 };
